@@ -1,0 +1,3 @@
+[submodule "ubuntu/openface"]
+	path = ubuntu/openface
+	url = ../../cmusatyalab/openface.git
