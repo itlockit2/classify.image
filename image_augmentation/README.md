@@ -1,39 +1,38 @@
 #Image Augmentation Process
 
-Docker¿¡ Train ÀÌ¹ÌÁöµ¥ÀÌÅÍ Àü¼Û 
-* Train ÀÌ¹ÌÁö´Â original_image¿¡ ¶óº§º°·Î Á¤¸®¸¦ ÇØ ³õ´Â´Ù.
-* sudo docker cp ¸¦ ÀÌ¿ëÇÏ¿© È£½ºÆ® ÀÌ¹ÌÁö¸¦ µµÄ¿¿¡ Àü¼Û
+## Dockerì— Train ì´ë¯¸ì§€ë°ì´í„° ì „ì†¡ 
+* Train ì´ë¯¸ì§€ëŠ” original_imageì— ë¼ë²¨ë³„ë¡œ ì •ë¦¬ë¥¼ í•´ ë†“ëŠ”ë‹¤.
+* sudo docker cp ë¥¼ ì´ìš©í•˜ì—¬ í˜¸ìŠ¤íŠ¸ ì´ë¯¸ì§€ë¥¼ ë„ì»¤ì— ì „ì†¡
 	* sudo docker cp /home/banana/image_augmentation/original_image/Hyun_soo 9841e190124b:/root/openface/training-images
 
-Docker¿¡¼­ Train ÀÌ¹ÌÁö¸¦ aligned_images·Î »ı¼º
+## Dockerì—ì„œ Train ì´ë¯¸ì§€ë¥¼ aligned_imagesë¡œ ìƒì„±
 * ./util/align-dlib.py ./training-images/ align outerEyesAndNose ./aligned-images/ --size 96
 
-Docker¿¡¼­ »ı¼ºÇÑ aligned_images¸¦ È£½ºÆ®·Î Àü¼Û
-* aligned_images´Â augmentation¿¡ ¶óº§º°·Î Á¤¸®¸¦ ÇØ ³õ´Â´Ù.
+## Dockerì—ì„œ ìƒì„±í•œ aligned_imagesë¥¼ í˜¸ìŠ¤íŠ¸ë¡œ ì „ì†¡
+* aligned_imagesëŠ” augmentationì— ë¼ë²¨ë³„ë¡œ ì •ë¦¬ë¥¼ í•´ ë†“ëŠ”ë‹¤.
 	* sudo docker cp 9841e190124b:/root/openface/aligned-images ~/image_augmentation/
+* original_imageì¤‘ ì¼ë¶€ë¶„ì€ aligned_imagesê°€ ìƒì„±ë˜ì§€ ì•ŠëŠ”ë‹¤.
 
-## original_imageÁß ÀÏºÎºĞÀº aligned_images°¡ »ı¼ºµÇÁö ¾Ê´Â´Ù.
+## aligned_images ì´ë¯¸ì§€ë“¤ì„ ë°ì´í„° ì¦ê°• ì‘ì—… ì‹¤ì‹œ
+* augmentation í´ë” ì•ˆì— ìˆëŠ” ì´ë¯¸ì§€ ì¦ê°•
+* generator_aug.ipynb íŒŒì¼ì„ í†µí•´ Image Augmentation ì‹¤í–‰
+* grid í´ë”ì—ëŠ” ê° ì‚¬ì§„ì˜ 64ê°œì˜ í•„í„°ë¥¼ ì ìš©í•œ ì‚¬ì§„ë“¤ì´ 8*8 grid í˜•íƒœë¡œ ê²°í•©ë˜ì–´ ë“¤ì–´ìˆë‹¤.
+* grid_after í´ë”ì—ëŠ” 8*8 grid í˜•íƒœë¡œ ê²°í•©ëœ ì‚¬ì§„ë“¤ì´ 64ê°œë¡œ ë¶„ë¦¬ë˜ì–´ ì €ì¥ì´ ëœë‹¤.
 
-aligned_images ÀÌ¹ÌÁöµéÀ» µ¥ÀÌÅÍ Áõ°­ ÀÛ¾÷ ½Ç½Ã
-* augmentation Æú´õ ¾È¿¡ ÀÖ´Â ÀÌ¹ÌÁö Áõ°­
-* generator_aug.ipynb ÆÄÀÏÀ» ÅëÇØ Image Augmentation ½ÇÇà
-* grid Æú´õ¿¡´Â °¢ »çÁøÀÇ 64°³ÀÇ ÇÊÅÍ¸¦ Àû¿ëÇÑ »çÁøµéÀÌ 8*8 grid ÇüÅÂ·Î °áÇÕµÇ¾î µé¾îÀÖ´Ù.
-* grid_after Æú´õ¿¡´Â 8*8 grid ÇüÅÂ·Î °áÇÕµÈ »çÁøµéÀÌ 64°³·Î ºĞ¸®µÇ¾î ÀúÀåÀÌ µÈ´Ù.
-
-grid_after Æú´õ¿¡ ÀÖ´Â Áõ°­µÈ ÀÌ¹ÌÁöµéÀ» docker·Î Àü¼ÛÇÑ´Ù.
+## grid_after í´ë”ì— ìˆëŠ” ì¦ê°•ëœ ì´ë¯¸ì§€ë“¤ì„ dockerë¡œ ì „ì†¡í•œë‹¤.
 * sudo docker cp /home/banana/image_augmentation/grid_after/Hyun_soo 9841e190124b:/root/openface/training-images
 
-Docker ¿¡¼­ ´Ù½Ã ÇĞ½ÀÀ» ½ÃÅ²´Ù.
-* ¸ÕÀú ±âÁ¸¿¡ ÀÖ´ø aligned-images¿¡ ÀÖ´Â µ¥ÀÌÅÍµéÀ» Áö¿ì°í  ÇĞ½ÀÀ» ½ÃÀÛÇÑ´Ù.
+## Docker ì—ì„œ ë‹¤ì‹œ í•™ìŠµì„ ì‹œí‚¨ë‹¤.
+* ë¨¼ì € ê¸°ì¡´ì— ìˆë˜ aligned-imagesì— ìˆëŠ” ë°ì´í„°ë“¤ì„ ì§€ìš°ê³   í•™ìŠµì„ ì‹œì‘í•œë‹¤.
 	* ./util/align-dlib.py ./training-images/ align outerEyesAndNose ./aligned-images/ --size 96
-* ÀÌÀü°ú ¸¶Âù°¡Áö·Î ¸¹Àº µ¥ÀÌÅÍµéÀÌ  aligned_images°¡ »ı¼ºµÇÁö ¾Ê´Â´Ù.
-*  aligned_images¿¡ ÀÖ´Â °¢ »çÁøµé¿¡¼­ 128°³ÀÇ Æ¯ÀÌÁ¡À» ÃßÃâÇÑ´Ù.
+* ì´ì „ê³¼ ë§ˆì°¬ê°€ì§€ë¡œ ë§ì€ ë°ì´í„°ë“¤ì´  aligned_imagesê°€ ìƒì„±ë˜ì§€ ì•ŠëŠ”ë‹¤.
+*  aligned_imagesì— ìˆëŠ” ê° ì‚¬ì§„ë“¤ì—ì„œ 128ê°œì˜ íŠ¹ì´ì ì„ ì¶”ì¶œí•œë‹¤.
 	* ./batch-represent/main.lua -outDir ./generated-embeddings/ -data ./aligned-images/
-* »ı¼ºµÈ csv ÆÄÀÏÀ» È£½ºÆ®·Î Àü¼ÛÇÑ´Ù.
+* ìƒì„±ëœ csv íŒŒì¼ì„ í˜¸ìŠ¤íŠ¸ë¡œ ì „ì†¡í•œë‹¤.
 	* sudo docker cp 9841e190124b:/root/openface/generated-embeddings ~/image_augmentation/
 
-Host¿¡¼­ ÇĞ½ÀÀ» ½ÃÀÛÇÑ´Ù.
-* ¸ÕÀú csv fileÀ» ÀĞ´Â´Ù.
+## Hostì—ì„œ í•™ìŠµì„ ì‹œì‘í•œë‹¤.
+* ë¨¼ì € csv fileì„ ì½ëŠ”ë‹¤.
 ```
 df = pd.read_csv("/home/banana/image_augmentation/reps.csv")
 X = df.iloc[:,:].values
@@ -41,7 +40,7 @@ df_2 = pd.read_csv("/home/banana/image_augmentation/labels.csv")
 Y = df_2.iloc[:,0].values
 ```
 
-* Training Data °ú Testing Data¸¦ ºĞ¸®ÇÏ°í CNN ÇĞ½ÀÀ» À§ÇØ 16*8 ÇüÅÂ·Î reshape ÇØÁØ´Ù.
+* Training Data ê³¼ Testing Dataë¥¼ ë¶„ë¦¬í•˜ê³  CNN í•™ìŠµì„ ìœ„í•´ 16*8 í˜•íƒœë¡œ reshape í•´ì¤€ë‹¤.
 ```
 X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size=0.2, random_state = 0)
 X_train = X_train.reshape(-1,16,8,1)
@@ -50,7 +49,7 @@ Y_train = to_categorical(Y_train)
 Y_test = to_categorical(Y_test)
 ```
 
-* ÇĞ½ÀÀ» ½ÃÀÛÇÑ´Ù.
+* í•™ìŠµì„ ì‹œì‘í•œë‹¤.
 ```
 model = Sequential()
 model.add(Conv2D(12, kernel_size=(2, 2), activation='relu', padding='same', 
