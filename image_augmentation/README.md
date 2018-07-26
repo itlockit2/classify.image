@@ -1,4 +1,4 @@
-#Image Augmentation Process
+# Image Augmentation Process
 
 ## Docker에 Train 이미지데이터 전송 
 * Train 이미지는 original_image에 라벨별로 정리를 해 놓는다.
